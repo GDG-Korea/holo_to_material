@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/movie_list"
-        android:name="com.gdgkoreaandroid.holotomaterial.VideoListFragment"
+        android:name="com.gdgkoreaandroid.holotomaterial.VideoBrowseFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"

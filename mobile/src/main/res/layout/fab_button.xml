@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_play"
+    android:layout_width="@dimen/fab_size"
+    android:layout_height="@dimen/fab_size"
+    android:background="@drawable/fab_background"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_play_arrow_white_24dp"/>
+
+</FrameLayout>

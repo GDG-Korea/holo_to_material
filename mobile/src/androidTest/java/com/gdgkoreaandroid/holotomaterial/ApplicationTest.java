@@ -32,11 +32,11 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             InputStreamReader isr = new InputStreamReader(is);
             Category[] categories = gson.fromJson(isr, Category[].class);
 
-            for(Category category : categories){
+            for (Category category : categories) {
                 Log.d(TAG, "Category:" + category.category + ", " + category.videos.length);
             }
 
-            Assert.assertEquals(4,categories.length);
+            Assert.assertEquals(4, categories.length);
 
             isr.close();
             is.close();
@@ -44,11 +44,4 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             //IGNORED
         }
     }
-
-    public void testVideoUriBuilder() {
-
-        //http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Google+/Google+_%20Instant%20Upload/card.jpg
-
-    }
-
 }

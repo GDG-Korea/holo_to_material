@@ -1,132 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.google.samples.apps.iosched.ui.widget.ScrimInsetsScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/left_drawer"
-    android:padding="2dp"
     android:orientation="vertical"
-    android:layout_width="240dp"
+    android:layout_width="304dp"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    app:insetForeground="#4000"
     android:background="#fff">
 
     <LinearLayout
-        android:id="@+id/left_drawer_my_videos"
-        android:orientation="horizontal"
-        android:padding="8dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/listPreferredItemHeightSmall"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_mood_black_36dp"
-            />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#A000"
-            android:paddingLeft="8dp"
-            android:gravity="center_vertical"
+        <FrameLayout
+            android:id="@+id/chosen_account_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/my_videos"
-            />
+            android:layout_height="@dimen/appbar_x2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/navi_drawer_bg"
+                android:scaleType="centerCrop"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/keyline_third"
+                android:paddingTop="@dimen/keyline_first"
+                android:paddingBottom="@dimen/keyline_first"
+                android:id="@+id/chosen_account_content_view">
+
+                <TextView
+                    android:id="@+id/profile_email_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+
+                    android:paddingLeft="@dimen/keyline_second"
+
+                    android:text="Hong Gildong"
+                    android:textSize="@dimen/content_cpation_12sp"
+                    android:textColor="@color/white_alpha_54"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/profile_name_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/profile_email_text"
+                    android:layout_alignParentLeft="true"
+
+                    android:paddingLeft="@dimen/keyline_second"
+
+                    android:text="gildong.hong@gmail.com"
+                    android:textSize="@dimen/content_body_14sp"
+                    android:textColor="@color/white_alpha_87"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:src="@drawable/person_image_empty"
+                    android:layout_width="@dimen/navdrawer_profile_image_size"
+                    android:layout_height="@dimen/navdrawer_profile_image_size"
+                    android:layout_marginLeft="@dimen/keyline_first"
+                    android:layout_alignParentBottom="true"
+                    android:scaleType="centerCrop" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <!--<CircleImageView-->
+        <!--android:layout_width=""-->
+        <!--android:layout_height=""/>-->
+
+        <FrameLayout
+            android:id="@+id/left_drawer_my_videos"
+            style="@style/Widget.MyTheme.NavigationDrawerItem">
+
+            <ImageView
+                android:src="@drawable/ic_mood_grey600_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/keyline_first"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.IconView"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/my_videos"
+                android:layout_marginLeft="@dimen/keyline_second"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.TextView"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/left_drawer_all_videos"
+            style="@style/Widget.MyTheme.NavigationDrawerItem">
+            <ImageView
+                android:src="@drawable/ic_movie_grey600_24dp"
+                android:layout_marginLeft="@dimen/keyline_first"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.IconView"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/all_videos"
+                android:layout_marginLeft="@dimen/keyline_second"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.TextView"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/left_drawer_purchase_videos"
+            style="@style/Widget.MyTheme.NavigationDrawerItem">
+            <ImageView
+                android:src="@drawable/ic_play_shopping_bag_grey600_24dp"
+                android:layout_marginLeft="@dimen/keyline_first"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.IconView"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/purchase_vidoes"
+                android:layout_marginLeft="@dimen/keyline_second"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.TextView"/>
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            style="@style/Widget.MyTheme.NavigationDrawerItem.DividerBold"/>
+
+        <FrameLayout
+            android:id="@+id/left_drawer_settings"
+            style="@style/Widget.MyTheme.NavigationDrawerItem">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/action_settings"
+                android:layout_marginLeft="@dimen/keyline_first"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.TextView"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/left_drawer_help"
+            style="@style/Widget.MyTheme.NavigationDrawerItem">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/keyline_first"
+                android:text="@string/action_help"
+                style="@style/Widget.MyTheme.NavigationDrawerItem.TextView"/>
+        </FrameLayout>
+
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#2000"/>
-
-    <LinearLayout
-        android:id="@+id/left_drawer_all_videos"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/listPreferredItemHeightSmall"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_movie_black_36dp"
-            />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#A000"
-            android:gravity="center_vertical"
-            android:paddingLeft="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/all_videos"
-            />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#6000"/>
-
-    <LinearLayout
-        android:id="@+id/left_drawer_settings"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/listPreferredItemHeightSmall"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_settings_applications_black_36dp"
-            />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#A000"
-            android:gravity="center_vertical"
-            android:paddingLeft="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/action_settings"
-            />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#2000"/>
-
-    <LinearLayout
-        android:id="@+id/left_drawer_help"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/listPreferredItemHeightSmall"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_help_black_36dp"
-            />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#A000"
-            android:gravity="center_vertical"
-            android:paddingLeft="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/action_help"
-            />
-    </LinearLayout>
-
-</LinearLayout>
+</com.google.samples.apps.iosched.ui.widget.ScrimInsetsScrollView>

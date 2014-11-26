@@ -6,20 +6,27 @@ import android.os.Parcelable;
 
 public class Video implements Parcelable {
 
+    public static final Parcelable.Creator<Video> CREATOR = new Parcelable.Creator<Video>() {
+        public Video createFromParcel(Parcel in) {
+            return new Video(in);
+        }
+
+        public Video[] newArray(int size) {
+            return new Video[size];
+        }
+    };
     private final static Uri PREFIX_URI;
     static {
         PREFIX_URI = Uri.parse(
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos");
     }
-
-    private String mCateogry;   //this field will be set by Category class.
-
     public String description;
     public String[] sources;
     public String card;
     public String background;
     public String title;
     public String studio;
+    private String mCateogry;   //this field will be set by Category class.
 
     public Video(Parcel in) {
         mCateogry = in.readString();
@@ -74,7 +81,6 @@ public class Video implements Parcelable {
         return builder.build();
     }
 
-
     @Override
     public String toString() {
         return "Video{" +
@@ -84,13 +90,4 @@ public class Video implements Parcelable {
                 ", cardImageUrl='" + card + '\'' +
                 '}';
     }
-
-    public static final Parcelable.Creator<Video> CREATOR = new Parcelable.Creator<Video>() {
-        public Video createFromParcel(Parcel in) {
-            return new Video(in);
-        }
-        public Video[] newArray(int size) {
-            return new Video[size];
-        }
-    };
 }

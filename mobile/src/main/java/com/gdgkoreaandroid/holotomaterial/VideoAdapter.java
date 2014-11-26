@@ -20,7 +20,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     private final Context mAppContext;
 
     public VideoAdapter(Context context, Category category, OnItemClickListener listener) {
-        mCategory= category;
+        mCategory = category;
         mOnItemClickListener = listener;
         mAppContext = context.getApplicationContext();
     }
@@ -29,13 +29,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int index) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
-                R.layout.grid_movie_item, viewGroup, false);
+                R.layout.grid_video_item, viewGroup, false);
         final ViewHolder holder = new ViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(mCategory.videos[holder.getPosition()]);
+                    mOnItemClickListener.onItemClick(v, mCategory.videos[holder.getPosition()]);
                 }
             }
         });
@@ -50,16 +50,12 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         TextView movieTitle = holder.mMovieTitle;
 
         Video video = mCategory.videos[index];
+        Glide.with(mAppContext).fromUri()
+                .centerCrop()
+                .load(video.getCardImageUri())
+                .crossFade(100)
+                .into(videoThumb);
 
-
-        Glide.with(mAppContext).
-                fromUri().
-                asBitmap().
-                centerCrop().
-                load(video.getCardImageUri()).
-                into(videoThumb);
-
-        //downloader.downloadImage(video.getCardImageUri(mCategory.category).toString(), videoThumb);
         movieTitle.setText(video.title);
     }
 
@@ -68,20 +64,20 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         return mCategory.videos.length;
     }
 
-    public static class ViewHolder  extends RecyclerView.ViewHolder {
+    public static interface OnItemClickListener {
+
+        public void onItemClick(View view, Video moive);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView mMovieThumb;
         private final TextView mMovieTitle;
 
         public ViewHolder(View v) {
             super(v);
-            mMovieThumb = (ImageView) v.findViewById(R.id.movie_thumbnail);
-            mMovieTitle = (TextView) v.findViewById(R.id.movie_title);
+            mMovieThumb = (ImageView) v.findViewById(R.id.grid_video_thumbnail);
+            mMovieTitle = (TextView) v.findViewById(R.id.grid_video_title);
         }
-    }
-
-    public static interface OnItemClickListener {
-
-        public void onItemClick(Video moive);
     }
 }

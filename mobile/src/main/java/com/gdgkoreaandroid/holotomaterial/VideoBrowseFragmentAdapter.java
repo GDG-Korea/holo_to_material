@@ -6,17 +6,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.gdgkoreaandroid.holotomaterial.data.Category;
 
-public class VideoListFragmentAdpater extends FragmentPagerAdapter {
+public class VideoBrowseFragmentAdapter extends FragmentPagerAdapter {
     private final Category[] mCategories;
 
-    public VideoListFragmentAdpater(FragmentManager fm, Category[] categories) {
+    public VideoBrowseFragmentAdapter(
+            FragmentManager fm, Category[] categories) {
         super(fm);
         mCategories = categories;
     }
 
     @Override
     public Fragment getItem(int index) {
-        return VideoListFragment.newInstance(mCategories[index], true);
+        return VideoBrowseFragment.newInstance(mCategories[index]);
     }
 
     @Override

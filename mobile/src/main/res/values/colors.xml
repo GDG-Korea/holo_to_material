@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_color">#ff5722</color>
-    <color name="primary_dark_color">#e64a19</color>
-    <color name="accent_color">#2257ff</color>
-    <color name="background_gradient_start">#000000</color>
-    <color name="background_gradient_end">#DDDDDD</color>
-    <color name="default_background">#3d3d3d</color>
+    <color name="colorPirmary">#009688</color>
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="colorPrimaryLight">#80CBC4</color>
+    <color name="colorAccent">#2962FF</color>
+
+    <color name="default_background">#F5F5F5</color>
+    <color name="default_white_background">#F5F5F5</color>
     <color name="detail_background">#0096a6</color>
+
+    <color name="black_alpha_87">#de000000</color>
+    <color name="black_alpha_54">#8a000000</color>
+    <color name="black_alpha_26">#42000000</color>
+    <color name="black_alpha_12">#1F000000</color>
+
+    <color name="white_alpha_87">#deffffff</color>
+    <color name="white_alpha_54">#8affffff</color>
+    <color name="white_alpha_26">#42ffffff</color>
+    <color name="white_alpha_12">#1Fffffff</color>
+
 </resources>
