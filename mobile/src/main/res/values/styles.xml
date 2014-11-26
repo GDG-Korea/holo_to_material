@@ -1,14 +1,96 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="MyTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPirmary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.FullScreen" parent="@style/Theme.AppCompat">
+    <style name="MyTheme.WithNavi" parent="@style/MyTheme"/>
+
+    <style name="MyTheme.FullScreen" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="Widget"/>
+
+    <style name="Widget.MyTheme"/>
+
+    <style name="Widget.MyTheme.NavigationDrawerItem">
+        <item name="android:clickable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?android:attr/listPreferredItemHeightSmall</item>
+    </style>
+
+    <style name="Widget.MyTheme.NavigationDrawerItem.Divider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/black_alpha_12</item>
+    </style>
+
+    <style name="Widget.MyTheme.NavigationDrawerItem.DividerBold">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/black_alpha_12</item>
+    </style>
+
+    <style name="Widget.MyTheme.NavigationDrawerItem.IconView">
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:clickable">false</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Widget.MyTheme.NavigationDrawerItem.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_alpha_87</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">false</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Widget.MyTheme.Grid">
+        <item name="android:background">#F5F5F5</item>
+
+    </style>
+
+    <style name="Widget.MyTheme.GridItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="Widget.MyTheme.GridItem.Thumbnail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/grid_height</item>
+
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="Widget.MyTheme.GridItem.Label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/grid_two_line_footer_height</item>
+
+        <item name="android:textColor">@color/black_alpha_87</item>
+        <item name="android:padding">@dimen/grid_text_padding_16dp</item>
+
+        <item name="android:textSize">@dimen/grid_text_size_14sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
 
 </resources>

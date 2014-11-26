@@ -1,8 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gdgkoreaandroid.holotomaterial.tv.TvMovieBrowseActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+    <item
+        android:id="@+id/menu_item_share"
+        android:title="Share"
+        android:icon="@drawable/ic_share_white_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/menu_item_refresh"
+        android:title="Refresh"
+        app:showAsAction="collapseActionView"/>
 </menu>

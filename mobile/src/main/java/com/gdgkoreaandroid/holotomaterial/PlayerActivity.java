@@ -40,7 +40,7 @@ public class PlayerActivity extends ActionBarActivity {
     private static final double MEDIA_BAR_LEFT_MARGIN = 0.2;
     private static final double MEDIA_BAR_HEIGHT = 0.1;
     private static final double MEDIA_BAR_WIDTH = 0.9;
-
+    private final Handler mHandler = new Handler();
     private VideoView mVideoView;
     private TextView mStartText;
     private TextView mEndText;
@@ -51,17 +51,29 @@ public class PlayerActivity extends ActionBarActivity {
     private Timer mSeekbarTimer;
     private Timer mControllersTimer;
     private PlaybackState mPlaybackState;
-    private final Handler mHandler = new Handler();
     private boolean mControlersVisible;
+    private final View.OnClickListener mPlayPauseHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            if (!mControlersVisible) {
+                updateControllersVisibility(true);
+            }
+
+            if (mPlaybackState == PlaybackState.PAUSED) {
+                mPlaybackState = PlaybackState.PLAYING;
+                updatePlayButton(mPlaybackState);
+                mVideoView.start();
+                startControllersTimer();
+            } else {
+                mVideoView.pause();
+
+                mPlaybackState = PlaybackState.PAUSED;
+                updatePlayButton(PlaybackState.PAUSED);
+                stopControllersTimer();
+            }
+
+        }
+    };
     private int mDuration;
-
-    /*
-     * List of various states that we can be in
-     */
-    public static enum PlaybackState {
-        PLAYING, PAUSED, BUFFERING, IDLE;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,172 +86,23 @@ public class PlayerActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        startVideoPlayer();
-        updateMetadata(true);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (null != mSeekbarTimer) {
-            mSeekbarTimer.cancel();
-            mSeekbarTimer = null;
-        }
-        if (null != mControllersTimer) {
-            mControllersTimer.cancel();
-        }
-        mVideoView.pause();
-        mPlaybackState = PlaybackState.PAUSED;
-        updatePlayButton(PlaybackState.PAUSED);
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         stopControllersTimer();
         stopSeekBarTimer();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }
+    private void loadViews() {
+        mVideoView = (VideoView) findViewById(R.id.videoView);
+        mStartText = (TextView) findViewById(R.id.startText);
+        mEndText = (TextView) findViewById(R.id.endText);
+        mSeekbar = (SeekBar) findViewById(R.id.seekBar);
+        mPlayPause = (ImageView) findViewById(R.id.playpause);
+        mLoading = (ProgressBar) findViewById(R.id.progressBar);
+        mControllers = findViewById(R.id.controllers);
+        View container = findViewById(R.id.container);
 
-    private void startVideoPlayer() {
-        Bundle b = getIntent().getExtras();
-
-        Video video = getIntent().getParcelableExtra(BUNDLE_KEY_VIDEO);
-        boolean play = getIntent().getBooleanExtra("play", false);
-        boolean pause = getIntent().getBooleanExtra("pause", false);
-
-        if(play){
-            mPlaybackState = PlaybackState.PLAYING;
-            updatePlayButton(mPlaybackState);
-            mVideoView.start();
-            startControllersTimer();
-        }else if(pause) {
-            mVideoView.pause();
-            mPlaybackState = PlaybackState.PAUSED;
-            updatePlayButton(PlaybackState.PAUSED);
-            stopControllersTimer();
-        }
-
-        if(video != null) {
-            Video selectedVideo = video;
-
-            if (selectedVideo != null) {
-                setTitle(selectedVideo.title);
-                boolean shouldStartPlayback = b.getBoolean(getResources().getString(R.string.should_start));
-                int startPosition = b.getInt(getResources().getString(R.string.start_position), 0);
-                Log.d(TAG, "Try to play: " + selectedVideo.getVideoUri().toString());
-                mVideoView.setVideoPath(selectedVideo.getVideoUri().toString());
-                if (shouldStartPlayback) {
-                    mPlaybackState = PlaybackState.PLAYING;
-                    updatePlayButton(mPlaybackState);
-                    if (startPosition > 0) {
-                        mVideoView.seekTo(startPosition);
-                    }
-                    mVideoView.start();
-                    mPlayPause.requestFocus();
-                    startControllersTimer();
-                } else {
-                    updatePlaybackLocation();
-                    mPlaybackState = PlaybackState.PAUSED;
-                    updatePlayButton(mPlaybackState);
-                }
-            }
-        }
-    }
-
-    private void updatePlaybackLocation() {
-        if (mPlaybackState == PlaybackState.PLAYING ||
-                mPlaybackState == PlaybackState.BUFFERING) {
-            startControllersTimer();
-        } else {
-            stopControllersTimer();
-        }
-    }
-
-    private void play(int position) {
-        startControllersTimer();
-        mVideoView.seekTo(position);
-        mVideoView.start();
-        restartSeekBarTimer();
-    }
-
-    private void stopSeekBarTimer() {
-        Log.d(TAG, "Stopped TrickPlay Timer");
-        if (null != mSeekbarTimer) {
-            mSeekbarTimer.cancel();
-        }
-    }
-
-    private void restartSeekBarTimer() {
-        stopSeekBarTimer();
-        mSeekbarTimer = new Timer();
-        mSeekbarTimer.scheduleAtFixedRate(new UpdateSeekbarTask(), SEEKBAR_DELAY_TIME,
-                SEEKBAR_INTERVAL_TIME);
-    }
-
-    private void stopControllersTimer() {
-        if (null != mControllersTimer) {
-            mControllersTimer.cancel();
-        }
-    }
-
-    private void startControllersTimer() {
-        if (null != mControllersTimer) {
-            mControllersTimer.cancel();
-        }
-        mControllersTimer = new Timer();
-        mControllersTimer.schedule(new HideControllersTask(), HIDE_CONTROLLER_TIME);
-    }
-
-    private void updateControllersVisibility(boolean show) {
-        if (show) {
-            mControllers.setVisibility(View.VISIBLE);
-        } else {
-            mControllers.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private class HideControllersTask extends TimerTask {
-        @Override
-        public void run() {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    updateControllersVisibility(false);
-                    mControlersVisible = false;
-                }
-            });
-
-        }
-    }
-
-    private class UpdateSeekbarTask extends TimerTask {
-
-        @Override
-        public void run() {
-            mHandler.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    final int currentPos;
-                    currentPos = mVideoView.getCurrentPosition();
-                    updateSeekbar(currentPos, mDuration);
-                }
-            });
-        }
+        container.setOnClickListener(mPlayPauseHandler);
     }
 
     private void setupController() {
@@ -307,46 +170,6 @@ public class PlayerActivity extends ActionBarActivity {
         });
     }
 
-    private void updateSeekbar(int position, int duration) {
-        mSeekbar.setProgress(position);
-        mSeekbar.setMax(duration);
-        mStartText.setText(formatMillis(position));
-        mEndText.setText(formatMillis(duration));
-    }
-
-    private void updatePlayButton(PlaybackState state) {
-        switch (state) {
-            case PLAYING:
-                mLoading.setVisibility(View.INVISIBLE);
-                mPlayPause.setVisibility(View.VISIBLE);
-                mPlayPause.setImageDrawable(
-                        getResources().getDrawable(R.drawable.ic_pause_playcontrol_normal));
-                break;
-            case PAUSED:
-            case IDLE:
-                mLoading.setVisibility(View.INVISIBLE);
-                mPlayPause.setVisibility(View.VISIBLE);
-                mPlayPause.setImageDrawable(
-                        getResources().getDrawable(R.drawable.ic_play_playcontrol_normal));
-                break;
-            case BUFFERING:
-                mPlayPause.setVisibility(View.INVISIBLE);
-                mLoading.setVisibility(View.VISIBLE);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void updateMetadata(boolean visible) {
-        mVideoView.invalidate();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return true;
-    }
-
     /**
      * Formats time in milliseconds to hh:mm:ss string format.
      *
@@ -378,39 +201,212 @@ public class PlayerActivity extends ActionBarActivity {
         return result;
     }
 
-
-    private void loadViews() {
-        mVideoView = (VideoView) findViewById(R.id.videoView);
-        mStartText = (TextView) findViewById(R.id.startText);
-        mEndText = (TextView) findViewById(R.id.endText);
-        mSeekbar = (SeekBar) findViewById(R.id.seekBar);
-        mPlayPause = (ImageView) findViewById(R.id.playpause);
-        mLoading = (ProgressBar) findViewById(R.id.progressBar);
-        mControllers = findViewById(R.id.controllers);
-        View container = findViewById(R.id.container);
-
-        container.setOnClickListener(mPlayPauseHandler);
+    private void restartSeekBarTimer() {
+        stopSeekBarTimer();
+        mSeekbarTimer = new Timer();
+        mSeekbarTimer.scheduleAtFixedRate(new UpdateSeekbarTask(), SEEKBAR_DELAY_TIME,
+                SEEKBAR_INTERVAL_TIME);
     }
 
-    private final View.OnClickListener mPlayPauseHandler = new View.OnClickListener() {
-        public void onClick(View v) {
-            if (!mControlersVisible) {
-                updateControllersVisibility(true);
-            }
+    private void stopSeekBarTimer() {
+        Log.d(TAG, "Stopped TrickPlay Timer");
+        if (null != mSeekbarTimer) {
+            mSeekbarTimer.cancel();
+        }
+    }
 
-            if (mPlaybackState == PlaybackState.PAUSED) {
-                mPlaybackState = PlaybackState.PLAYING;
-                updatePlayButton(mPlaybackState);
-                mVideoView.start();
-                startControllersTimer();
-            } else {
-                mVideoView.pause();
+    private void updatePlayButton(PlaybackState state) {
+        switch (state) {
+            case PLAYING:
+                mLoading.setVisibility(View.INVISIBLE);
+                mPlayPause.setVisibility(View.VISIBLE);
+                mPlayPause.setImageDrawable(
+                        getResources().getDrawable(R.drawable.ic_pause_playcontrol_normal));
+                break;
+            case PAUSED:
+            case IDLE:
+                mLoading.setVisibility(View.INVISIBLE);
+                mPlayPause.setVisibility(View.VISIBLE);
+                mPlayPause.setImageDrawable(
+                        getResources().getDrawable(R.drawable.ic_play_playcontrol_normal));
+                break;
+            case BUFFERING:
+                mPlayPause.setVisibility(View.INVISIBLE);
+                mLoading.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
+    }
 
-                mPlaybackState = PlaybackState.PAUSED;
-                updatePlayButton(PlaybackState.PAUSED);
-                stopControllersTimer();
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (null != mSeekbarTimer) {
+            mSeekbarTimer.cancel();
+            mSeekbarTimer = null;
+        }
+        if (null != mControllersTimer) {
+            mControllersTimer.cancel();
+        }
+        mVideoView.pause();
+        mPlaybackState = PlaybackState.PAUSED;
+        updatePlayButton(PlaybackState.PAUSED);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startVideoPlayer();
+        updateMetadata(true);
+    }
+
+    private void startVideoPlayer() {
+        Bundle b = getIntent().getExtras();
+
+        Video video = getIntent().getParcelableExtra(BUNDLE_KEY_VIDEO);
+        boolean play = getIntent().getBooleanExtra("play", false);
+        boolean pause = getIntent().getBooleanExtra("pause", false);
+
+        if (play) {
+            mPlaybackState = PlaybackState.PLAYING;
+            updatePlayButton(mPlaybackState);
+            mVideoView.start();
+            startControllersTimer();
+        } else if (pause) {
+            mVideoView.pause();
+            mPlaybackState = PlaybackState.PAUSED;
+            updatePlayButton(PlaybackState.PAUSED);
+            stopControllersTimer();
+        }
+
+        if (video != null) {
+            Video selectedVideo = video;
+
+            if (selectedVideo != null) {
+                setTitle(selectedVideo.title);
+                boolean shouldStartPlayback = b.getBoolean(getResources().getString(R.string.should_start));
+                int startPosition = b.getInt(getResources().getString(R.string.start_position), 0);
+                Log.d(TAG, "Try to play: " + selectedVideo.getVideoUri().toString());
+                mVideoView.setVideoPath(selectedVideo.getVideoUri().toString());
+                if (shouldStartPlayback) {
+                    mPlaybackState = PlaybackState.PLAYING;
+                    updatePlayButton(mPlaybackState);
+                    if (startPosition > 0) {
+                        mVideoView.seekTo(startPosition);
+                    }
+                    mVideoView.start();
+                    mPlayPause.requestFocus();
+                    startControllersTimer();
+                } else {
+                    updatePlaybackLocation();
+                    mPlaybackState = PlaybackState.PAUSED;
+                    updatePlayButton(mPlaybackState);
+                }
             }
+        }
+    }
+
+    private void updateMetadata(boolean visible) {
+        mVideoView.invalidate();
+    }
+
+    private void startControllersTimer() {
+        if (null != mControllersTimer) {
+            mControllersTimer.cancel();
+        }
+        mControllersTimer = new Timer();
+        mControllersTimer.schedule(new HideControllersTask(), HIDE_CONTROLLER_TIME);
+    }
+
+    private void stopControllersTimer() {
+        if (null != mControllersTimer) {
+            mControllersTimer.cancel();
+        }
+    }
+
+    private void updatePlaybackLocation() {
+        if (mPlaybackState == PlaybackState.PLAYING ||
+                mPlaybackState == PlaybackState.BUFFERING) {
+            startControllersTimer();
+        } else {
+            stopControllersTimer();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return true;
+    }
+
+    private void play(int position) {
+        startControllersTimer();
+        mVideoView.seekTo(position);
+        mVideoView.start();
+        restartSeekBarTimer();
+    }
+
+    private void updateControllersVisibility(boolean show) {
+        if (show) {
+            mControllers.setVisibility(View.VISIBLE);
+        } else {
+            mControllers.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void updateSeekbar(int position, int duration) {
+        mSeekbar.setProgress(position);
+        mSeekbar.setMax(duration);
+        mStartText.setText(formatMillis(position));
+        mEndText.setText(formatMillis(duration));
+    }
+
+    /*
+     * List of various states that we can be in
+     */
+    public static enum PlaybackState {
+        PLAYING, PAUSED, BUFFERING, IDLE;
+    }
+
+    private class HideControllersTask extends TimerTask {
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    updateControllersVisibility(false);
+                    mControlersVisible = false;
+                }
+            });
 
         }
-    };
+    }
+
+    private class UpdateSeekbarTask extends TimerTask {
+
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    final int currentPos;
+                    currentPos = mVideoView.getCurrentPosition();
+                    updateSeekbar(currentPos, mDuration);
+                }
+            });
+        }
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name"><![CDATA[From Holo to Material]]></string>
+    <string name="app_name"><![CDATA[Holo to Material]]></string>
     <string name="title_movie_detail">Movie Detail</string>
     <string name="related_movies">Related Videos</string>
     <string name="vertical_grid_title"><![CDATA[Vertical Video Grid]]></string>
@@ -61,5 +61,6 @@
     <string name="my_videos">My Favorites</string>
     <string name="all_videos">All Videos</string>
     <string name="action_help">Help</string>
+    <string name="purchase_vidoes">Shopping</string>
 
 </resources>
