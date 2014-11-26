@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/left_drawer"
+    android:padding="2dp"
+    android:orientation="vertical"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#fff">
+
+    <LinearLayout
+        android:id="@+id/left_drawer_my_videos"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mood_black_36dp"
+            />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#A000"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/my_videos"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#2000"/>
+
+    <LinearLayout
+        android:id="@+id/left_drawer_all_videos"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_movie_black_36dp"
+            />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#A000"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/all_videos"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#6000"/>
+
+    <LinearLayout
+        android:id="@+id/left_drawer_settings"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_settings_applications_black_36dp"
+            />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#A000"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/action_settings"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#2000"/>
+
+    <LinearLayout
+        android:id="@+id/left_drawer_help"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeightSmall"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_help_black_36dp"
+            />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#A000"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/action_help"
+            />
+    </LinearLayout>
+
+</LinearLayout>

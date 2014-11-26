@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/grid_height"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="8dp"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/movie_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        />
+
+    <TextView
+        android:id="@+id/movie_title"
+
+        android:background="#AA000000"
+        android:textColor="#FFFFFFFF"
+        android:paddingLeft="@dimen/defaultPadding"
+        android:gravity="center_vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/baseline_grid"
+
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/subheadFont"
+        android:maxLines="2"
+
+        android:ellipsize="end"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
+</RelativeLayout>
