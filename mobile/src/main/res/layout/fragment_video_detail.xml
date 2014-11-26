@@ -1,0 +1,79 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/movie_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/movie_detail_thumb_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/appbar_x4"
+            android:paddingBottom="@dimen/halfPadding">
+
+            <ImageView
+                android:id="@+id/movie_detail_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside" />
+
+            <View
+                android:id="@+id/movie_detail_layer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#55000000" />
+
+            <ImageView
+                android:id="@+id/movie_detail_play"
+                android:layout_width="@dimen/touchTarget"
+                android:layout_height="@dimen/touchTarget"
+                android:layout_centerInParent="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/play_button" />
+
+            <ProgressBar
+                android:id="@+id/movie_detail_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/movie_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/halfPadding"
+            android:paddingLeft="@dimen/defaultPadding"
+            android:paddingRight="@dimen/defaultPadding"
+            android:paddingTop="@dimen/halfPadding"
+            android:textSize="@dimen/titleFont" />
+
+        <TextView
+            android:id="@+id/movie_detail_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/halfPadding"
+            android:paddingLeft="@dimen/defaultPadding"
+            android:paddingRight="@dimen/defaultPadding"
+            android:paddingTop="@dimen/halfPadding"
+            android:textSize="@dimen/bodyFont" />
+
+        <TextView
+            android:id="@+id/movie_detail_descritpion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/halfPadding"
+            android:paddingLeft="@dimen/defaultPadding"
+            android:paddingRight="@dimen/defaultPadding"
+            android:paddingTop="@dimen/halfPadding"
+            android:textSize="@dimen/bodyFont" />
+
+    </LinearLayout>
+
+</ScrollView>

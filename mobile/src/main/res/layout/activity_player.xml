@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:focusable="true"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+        android:id="@+id/controllers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/touchTarget"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/playpause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:contentDescription="@+id/play_pause_description"
+                android:src="@drawable/ic_play_playcontrol_normal" />
+
+            <TextView
+                android:id="@+id/startText"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/halfPadding"
+                android:layout_toRightOf="@+id/playpause"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@+id/init_text"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/endText"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/halfPadding"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@+id/init_text"
+                android:textColor="@android:color/white" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/halfPadding"
+                android:layout_marginRight="@dimen/halfPadding"
+                android:layout_toLeftOf="@+id/endText"
+                android:layout_toRightOf="@+id/startText" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
