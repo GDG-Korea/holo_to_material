@@ -7,7 +7,7 @@
 
     <style name="MyTheme.WithNavi" parent="@style/MyTheme"/>
 
-    <style name="MyTheme.FullScreen" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="MyTheme.FullScreen">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>

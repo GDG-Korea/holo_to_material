@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -45,7 +44,7 @@ public class VideoBrowseActivity extends ActionBarActivity
 
     private static final String TAG = "VideoBrowseActivity";
 
-    private Toolbar mToolbar;
+    private View  mToolbar;
     private View mTabContainer;
 
     private int mMaxTabContainerY;
@@ -78,7 +77,7 @@ public class VideoBrowseActivity extends ActionBarActivity
     private void initToolbar() {
 
         Log.d(TAG, "initToolbar");
-        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //setSupportActionBar(mToolbar);
     }
 
