@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -92,10 +93,8 @@ public class VideoBrowseActivity extends ActionBarActivity
         pager.setAdapter(adpater);
 
         final SlidingTabLayout tabs = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-        tabs.setViewPager(pager);
         tabs.setDividerColors(getResources().getColor(R.color.colorPirmary));
         tabs.setSelectedIndicatorColors(getResources().getColor(R.color.white_alpha_87));
-
         tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             public static final String TAG = "OnPageChangeListener";
@@ -118,6 +117,7 @@ public class VideoBrowseActivity extends ActionBarActivity
         });
 
         mTabContainer = findViewById(R.id.tab_container);
+        //tabs.setViewPager(pager);
     }
 
     private void initNaviDrawer() {
