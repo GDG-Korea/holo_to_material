@@ -78,9 +78,8 @@ public class VideoBrowseActivity extends ActionBarActivity
     private void initToolbar() {
 
         Log.d(TAG, "initToolbar");
-
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mToolbar);
+        //setSupportActionBar(mToolbar);
     }
 
     private void initFragmentPager() {
