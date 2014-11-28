@@ -1,4 +1,4 @@
-Holo to Materal_codelab
+Holo to Material Codelab
 =======================
 
 GDG Devfair 2014 HoloToMaterial 코드랩 행사를 위한 샘플 프로젝트 입니다.
