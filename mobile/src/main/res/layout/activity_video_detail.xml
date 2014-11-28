@@ -33,8 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/content_image"
             android:orientation="vertical"
-            android:background="?attr/colorPrimary"
-            android:transitionName="@string/shared_element_1">
+            android:background="?attr/colorPrimary">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/my_toolbar"
@@ -73,8 +72,7 @@
             android:layout_below="@id/content_header"
             tools:context=".MovieDetailActivity"
             app:shadowDrawable="@drawable/bottom_shadow"
-            app:shadowVisible="true"
-            android:transitionName="@string/shared_element_2"/>
+            app:shadowVisible="true"/>
 
         <include
             layout="@layout/fab_button"

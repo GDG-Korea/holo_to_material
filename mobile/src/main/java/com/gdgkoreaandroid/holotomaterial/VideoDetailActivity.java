@@ -130,7 +130,6 @@ public class VideoDetailActivity extends ActionBarActivity {
     private void initFAB() {
 
         final View view = findViewById(R.id.content_play);
-        view.setVisibility(View.INVISIBLE);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +140,7 @@ public class VideoDetailActivity extends ActionBarActivity {
             }
         });
 
+        view.setVisibility(View.INVISIBLE);
         view.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override

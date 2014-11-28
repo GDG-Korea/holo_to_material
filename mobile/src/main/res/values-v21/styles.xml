@@ -7,8 +7,6 @@
         <item name="colorPrimary">@color/colorPirmary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="android:windowSharedElementsUseOverlay">false</item>
     </style>
 
     <style name="MyTheme.WithNavi" parent="@style/MyTheme">
