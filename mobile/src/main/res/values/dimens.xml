@@ -9,9 +9,9 @@
     <!--key lines-->
     <dimen name="baseline_grid">8dp</dimen>
     <dimen name="baseline_grid_for_text">4dp</dimen>
-    <dimen name="keyline_first">16dp</dimen>
-    <dimen name="keyline_second">72dp</dimen>
-    <dimen name="keyline_third">16dp</dimen>
+    <dimen name="keyline_first">8dp</dimen>
+    <dimen name="keyline_second">40dp</dimen>
+    <dimen name="keyline_third">8dp</dimen>
     <dimen name="keyline_first_minus">8dp</dimen>
 
     <!--increments-->
