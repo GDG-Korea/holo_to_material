@@ -38,14 +38,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"/>
 
-            <com.google.samples.apps.iosched.ui.widget.DrawShadowFrameLayout
-                android:id="@+id/tab_shadow"
-                android:layout_below="@id/sliding_tabs"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                app:shadowDrawable="@drawable/bottom_shadow"
-                app:shadowVisible="true"/>
-
         </RelativeLayout>
 
     </RelativeLayout>
