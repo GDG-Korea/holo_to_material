@@ -63,4 +63,7 @@
     <string name="action_help">Help</string>
     <string name="purchase_vidoes">Shopping</string>
 
+    <string name="shared_element_1">SharedElement1</string>
+    <string name="shared_element_2">SharedElement2</string>
+
 </resources>
