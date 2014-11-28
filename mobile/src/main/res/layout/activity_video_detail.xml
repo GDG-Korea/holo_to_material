@@ -34,7 +34,7 @@
             android:layout_below="@id/content_image"
             android:orientation="vertical"
             android:background="?attr/colorPrimary"
-            android:transitionName="SharedElement">
+            android:transitionName="@string/shared_element_1">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/my_toolbar"
@@ -74,7 +74,7 @@
             tools:context=".MovieDetailActivity"
             app:shadowDrawable="@drawable/bottom_shadow"
             app:shadowVisible="true"
-            android:transitionName="SharedElementShadow"/>
+            android:transitionName="@string/shared_element_2"/>
 
         <include
             layout="@layout/fab_button"

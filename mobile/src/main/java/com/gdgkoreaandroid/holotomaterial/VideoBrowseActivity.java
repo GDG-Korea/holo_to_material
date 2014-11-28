@@ -1,5 +1,6 @@
 package com.gdgkoreaandroid.holotomaterial;
 
+import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -279,15 +280,20 @@ public class VideoBrowseActivity extends ActionBarActivity
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // start the new activity
-            View titleView = view.findViewById(R.id.grid_video_title);
-            View shadowView = view.findViewById(R.id.grid_video_shadow);
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this,
-                    new Pair<View, String>(titleView, "SharedElement"),
-                    new Pair<View, String>(shadowView, "SharedElementShadow"));
-            startActivity(detailIntent, options.toBundle());
+            startActivityWithTransition(detailIntent, view);
         } else {
             startActivity(detailIntent);
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void startActivityWithTransition(Intent detailIntent, View view) {
+        View titleView = view.findViewById(R.id.grid_video_title);
+        View shadowView = view.findViewById(R.id.grid_video_shadow);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this,
+                new Pair<View, String>(titleView, getString(R.string.shared_element_1)),
+                new Pair<View, String>(shadowView, getString(R.string.shared_element_2)));
+        startActivity(detailIntent, options.toBundle());
     }
 
     @Override

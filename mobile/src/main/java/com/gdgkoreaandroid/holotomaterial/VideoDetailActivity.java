@@ -70,6 +70,7 @@ public class VideoDetailActivity extends ActionBarActivity {
                             new ColorDrawable(getResources().getColor(R.color.colorPrimaryLight)))
                     .crossFade(300)
                     .load(mSelectedVideo.getBackgroundUri())
+                    .thumbnail(0.1f)
                     .into(iv);
         }
     }
