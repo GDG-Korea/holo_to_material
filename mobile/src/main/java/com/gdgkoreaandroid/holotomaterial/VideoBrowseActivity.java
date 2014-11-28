@@ -1,26 +1,27 @@
 package com.gdgkoreaandroid.holotomaterial;
 
 import android.annotation.TargetApi;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.Pair;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.common.view.SlidingTabLayout;
 import com.gdgkoreaandroid.holotomaterial.data.Video;
 import com.gdgkoreaandroid.holotomaterial.data.Videos;
+
+//import android.support.v7.app.ActionBarDrawerToggle;
 
 /**
  * An activity representing a list of videos. This activity
@@ -129,7 +130,7 @@ public class VideoBrowseActivity extends ActionBarActivity
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
-                mToolbar,
+                R.drawable.ic_drawer,
                 R.string.drawer_open,  /* "open drawer" description for accessibility */
                 R.string.drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -245,6 +246,15 @@ public class VideoBrowseActivity extends ActionBarActivity
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
