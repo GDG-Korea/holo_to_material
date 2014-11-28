@@ -139,27 +139,6 @@ public class VideoDetailActivity extends ActionBarActivity {
                 v.getContext().startActivity(intent);
             }
         });
-
-        view.setVisibility(View.INVISIBLE);
-        view.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-                            view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        }
-
-                        view.setY(view.getY() + getResources().getDimensionPixelSize(
-                                R.dimen.fab_margin_with_appbar));
-                        view.setScaleX(0.1f);
-                        view.setScaleY(0.1f);
-                        view.setAlpha(0.f);
-                        view.setVisibility(View.VISIBLE);
-                        view.animate().scaleX(1.f).scaleY(1.f).alpha(1.f)
-                                .setDuration(300)
-                                .setInterpolator(new OvershootInterpolator()).setStartDelay(500).start();
-                    }
-                });
     }
 
     private void initParallaxEffect() {
