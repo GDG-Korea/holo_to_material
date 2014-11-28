@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:layout_gravity="start"
-    android:fitsSystemWindows="true"
     app:insetForeground="#4000"
     android:background="#fff">
 

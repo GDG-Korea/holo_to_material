@@ -4,8 +4,8 @@
     android:id="@+id/drawer_layout"
     android:paddingTop="0dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
+
 
     <!-- The main content view -->
     <RelativeLayout
@@ -30,13 +30,13 @@
 
         </android.support.v4.view.ViewPager>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@id/my_toolbar"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:visibility="gone"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:background="?attr/colorPrimary"/>
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@id/my_toolbar"-->
+            <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="?attr/colorPrimary"/>-->
 
         <RelativeLayout
             android:id="@+id/tab_container"
