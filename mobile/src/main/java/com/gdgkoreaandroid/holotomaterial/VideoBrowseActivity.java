@@ -206,26 +206,7 @@ public class VideoBrowseActivity extends ActionBarActivity
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
-                final int offset = (int) (dy * .66f);
-                final float futureTabPosY = mTabContainer.getY() - offset;
-                final float futureAppbarPosY = mToolbar.getY() - offset;
-
-                if (futureTabPosY <= mMinTabContainerY) {
-                    mTabContainer.setY(mMinTabContainerY);
-                } else if (futureTabPosY >= mMaxTabContainerY) {
-                    mTabContainer.setY(mMaxTabContainerY);
-                } else {
-                    mTabContainer.setY(futureTabPosY);
-                }
-
-                if (futureAppbarPosY <= mMinAppBarY) {
-                    mToolbar.setY(mMinAppBarY);
-                } else if (futureAppbarPosY >= mMaxAppBarY) {
-                    mToolbar.setY(mMaxAppBarY);
-                } else {
-                    mToolbar.setY(futureAppbarPosY);
-                }
+                // TODO
             }
         };
     }
