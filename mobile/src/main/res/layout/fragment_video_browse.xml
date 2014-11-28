@@ -3,8 +3,8 @@
     android:id="@+id/recyclerview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?android:attr/actionBarSize"
     android:paddingBottom="?android:attr/actionBarSize"
+    android:paddingTop="0dp"
     android:clipToPadding="false"
     style="@style/Widget.MyTheme.Grid">
 </android.support.v7.widget.RecyclerView>
