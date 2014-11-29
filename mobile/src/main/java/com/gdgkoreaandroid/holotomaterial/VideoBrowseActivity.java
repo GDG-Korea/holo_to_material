@@ -274,6 +274,7 @@ public class VideoBrowseActivity extends ActionBarActivity
 
     @Override
     public RecyclerView.OnScrollListener getScrollListener() {
+        initParallaxEffect();
         return mScrollListener;
     }
 }
