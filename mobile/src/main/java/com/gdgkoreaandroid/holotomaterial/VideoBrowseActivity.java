@@ -142,6 +142,7 @@ public class VideoBrowseActivity extends ActionBarActivity
         };
 
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
