@@ -1,6 +1,7 @@
 package com.gdgkoreaandroid.holotomaterial;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -111,6 +112,26 @@ public class VideoBrowseFragment extends Fragment {
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(layoutManager);
+        final int padding = getResources().getDimensionPixelOffset(R.dimen.grid_padding_4dp) / 2;
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+
+                if (parent.getChildPosition(view) == 0 ||
+                        parent.getChildPosition(view) == 1) {
+                    outRect.top = 0;
+                } else {
+                    outRect.top= padding * 2;
+                }
+                // Add top margin only for the first item to avoid double space between items
+                if(parent.getChildPosition(view) % 2 == 0) {
+                    outRect.right = padding;
+                } else {
+                    outRect.left = padding;
+                }
+            }
+        });
 
         VideoAdapter adapter = new VideoAdapter(getActivity(), mCategory,
                 new VideoAdapter.OnItemClickListener() {

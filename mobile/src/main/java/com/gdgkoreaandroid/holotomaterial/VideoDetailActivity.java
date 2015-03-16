@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
-//import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,8 +77,8 @@ public class VideoDetailActivity extends ActionBarActivity {
 
     private void initToolbar() {
         // Show the Up button in the action bar.
-//        final Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//        setSupportActionBar(toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
     }
@@ -139,6 +139,27 @@ public class VideoDetailActivity extends ActionBarActivity {
                 v.getContext().startActivity(intent);
             }
         });
+
+        view.setVisibility(View.INVISIBLE);
+        view.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+                            view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+
+                        view.setY(view.getY() + getResources().getDimensionPixelSize(
+                                R.dimen.fab_margin_with_appbar));
+                        view.setScaleX(0.1f);
+                        view.setScaleY(0.1f);
+                        view.setAlpha(0.f);
+                        view.setVisibility(View.VISIBLE);
+                        view.animate().scaleX(1.f).scaleY(1.f).alpha(1.f)
+                                .setDuration(300)
+                                .setInterpolator(new OvershootInterpolator()).setStartDelay(500).start();
+                    }
+                });
     }
 
     private void initParallaxEffect() {

@@ -7,6 +7,7 @@
     android:layout_width="304dp"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:fitsSystemWindows="true"
     android:layout_gravity="start"
     app:insetForeground="#4000"
     android:background="#fff">

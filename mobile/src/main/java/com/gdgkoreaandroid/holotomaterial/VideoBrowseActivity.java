@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -44,8 +45,8 @@ public class VideoBrowseActivity extends ActionBarActivity
 
     private static final String TAG = "VideoBrowseActivity";
 
-    private View  mToolbar;
-    private View mTabContainer;
+    private View mToolbar;
+    private View mTabs;
 
     private int mMaxTabContainerY;
     private int mMinTabContainerY;
@@ -77,8 +78,8 @@ public class VideoBrowseActivity extends ActionBarActivity
     private void initToolbar() {
 
         Log.d(TAG, "initToolbar");
-        //mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //setSupportActionBar(mToolbar);
+        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar((Toolbar) mToolbar);
     }
 
     private void initFragmentPager() {
@@ -105,7 +106,7 @@ public class VideoBrowseActivity extends ActionBarActivity
             @Override
             public void onPageSelected(int index) {
                 mToolbar.animate().y(mMaxAppBarY).start();
-                mTabContainer.animate().y(mMaxTabContainerY).start();
+                mTabs.animate().y(mMaxTabContainerY).start();
             }
 
             @Override
@@ -114,8 +115,8 @@ public class VideoBrowseActivity extends ActionBarActivity
             }
         });
 
-        mTabContainer = findViewById(R.id.tab_container);
-        //tabs.setViewPager(pager);
+        mTabs = findViewById(R.id.sliding_tabs);
+        tabs.setViewPager(pager);
     }
 
     private void initNaviDrawer() {
@@ -126,11 +127,11 @@ public class VideoBrowseActivity extends ActionBarActivity
         final View drawerList = findViewById(R.id.left_drawer);
 
         mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
+                this,
+                mDrawerLayout,
+                (Toolbar) mToolbar,
+                R.string.drawer_open,
+                R.string.drawer_close
         ) {
             public void onDrawerOpened(View drawerView) {
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -206,7 +207,26 @@ public class VideoBrowseActivity extends ActionBarActivity
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                // TODO
+
+                final int offset = (int) (dy * .66f);
+                final float futureTabPosY = mTabs.getY() - offset;
+                final float futureAppbarPosY = mToolbar.getY() - offset;
+
+                if (futureTabPosY <= mMinTabContainerY) {
+                    mTabs.setY(mMinTabContainerY);
+                } else if (futureTabPosY >= mMaxTabContainerY) {
+                    mTabs.setY(mMaxTabContainerY);
+                } else {
+                    mTabs.setY(futureTabPosY);
+                }
+
+                if (futureAppbarPosY <= mMinAppBarY) {
+                    mToolbar.setY(mMinAppBarY);
+                } else if (futureAppbarPosY >= mMaxAppBarY) {
+                    mToolbar.setY(mMaxAppBarY);
+                } else {
+                    mToolbar.setY(futureAppbarPosY);
+                }
             }
         };
     }

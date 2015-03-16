@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:paddingTop="0dp"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <!-- The main content view -->
     <RelativeLayout
@@ -13,45 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@id/my_toolbar"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimary"/>
+
         <android.support.v4.view.ViewPager
             android:id="@+id/content_pager"
-            android:layout_below="@+id/my_toolbar"
+            android:layout_below="@id/my_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <android.support.v4.view.PagerTabStrip
-                android:id="@+id/pager_tabs"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="top"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:textColor="#000000" />
-
         </android.support.v4.view.ViewPager>
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@id/my_toolbar"-->
-            <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-            <!--android:visibility="gone"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:background="?attr/colorPrimary"/>-->
-
-        <RelativeLayout
-            android:id="@+id/tab_container"
+        <com.example.android.common.view.SlidingTabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_below="@id/my_toolbar"
+            android:background="@color/colorPirmary"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/my_toolbar">
-
-            <com.example.android.common.view.SlidingTabLayout
-                android:visibility="invisible"
-                android:id="@+id/sliding_tabs"
-                android:background="@color/colorPirmary"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"/>
-
-        </RelativeLayout>
+            android:layout_height="?attr/actionBarSize"/>
 
     </RelativeLayout>
 

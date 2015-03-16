@@ -33,12 +33,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/content_image"
             android:orientation="vertical">
-            <!--<android.support.v7.widget.Toolbar-->
-                <!--android:id="@+id/my_toolbar"-->
-                <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:minHeight="?attr/actionBarSize" />-->
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:minHeight="?attr/actionBarSize" />
 
             <TextView
                 android:id="@+id/content_title"
